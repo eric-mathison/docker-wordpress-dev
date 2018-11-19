@@ -1,0 +1,48 @@
+version: '3'
+services: 
+    nginx:
+        image: nginx:latest
+        container_name: nginx
+        ports: 
+            - '80:80'
+        volumes: 
+            - ./nginx:/etc/nginx/conf.d
+            - ./logs/nginx:/var/log/nginx
+        links: 
+            - wordpress
+        restart: always
+
+    mysql:
+        image: mariadb:10.3
+        container_name: mysql
+        ports: 
+            - '3306:3306'
+        volumes: 
+            - ./mysql:/var/lib/mysql
+        environment: 
+            - MYSQL_ROOT_PASSWORD=password
+            - MYSQL_USER=wp_user
+            - MYSQL_PASSWORD=wp_password
+            - MYSQL_DATABASE=wordpress
+        restart: always
+        command:
+            'mysqld --innodb-flush-method=fsync'
+
+    wordpress:
+        image: wordpress:4.9.8-php7.2-fpm
+        container_name: wordpress
+        depends_on:
+            - mysql
+        ports: 
+            - '9000:9000'
+        volumes: 
+            - ./wordpress:/var/www/html
+        environment: 
+            - WORDPRESS_DB_NAME=wordpress
+            - WORDPRESS_TABLE_PREFIX=wp_
+            - WORDPRESS_DB_HOST=mysql
+            - WORDPRESS_DB_PASSWORD=wp_password
+            - WORDPRESS_DB_USER=wp_user
+        links:
+            - mysql
+        restart: always
