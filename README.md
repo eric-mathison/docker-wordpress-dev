@@ -13,7 +13,7 @@ Docker Compose
 
 Clone the repository to a directory
 ```
-git clone 
+git clone https://github.com/eric-mathison/docker-wordpress-dev.git
 ```
 
 Once the repo is cloned, create required directories for the project.
