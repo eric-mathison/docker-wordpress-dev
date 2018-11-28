@@ -40,6 +40,7 @@ services:
         volumes: 
             - ./wordpress:/var/www/html
             - ./cache:/var/cache/nginxfastcgi
+            - ./php/wordpress.ini:/usr/local/etc/php/conf.d/wordpress.ini
         environment: 
             - WORDPRESS_DB_NAME=wordpress
             - WORDPRESS_TABLE_PREFIX=wp_
