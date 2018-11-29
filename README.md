@@ -26,12 +26,13 @@ mkdir wordpress/
 
 Next, open `wordpress.conf` in an editor and change the domain.
 ```
-server_name dev.local;    // change or leave as is
+server_name dev.localhost;    // change or leave as is
 ```
 
 Add entry in host file
+*Chrome automatically will redirect .localhost to 127.0.0.1*
 ```
-127.0.0.1 dev.local
+127.0.0.1 dev.localhost
 ```
 
 ## Usage
