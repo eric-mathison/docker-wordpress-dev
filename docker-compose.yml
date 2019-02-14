@@ -31,7 +31,7 @@ services:
             'mysqld --innodb-flush-method=fsync'
 
     wordpress:
-        image: wordpress:4.9.8-php7.2-fpm
+        image: wordpress:fpm
         container_name: wordpress
         depends_on:
             - mysql
